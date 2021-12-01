@@ -1,14 +1,22 @@
-function getSolutionPart1() {
-    return 1337;
+const fs = require('fs')
+
+const determineIncrease = (data) => {
+    let increasedCount = 0
+    let i = 1;
+    do {
+        if (data[i-1] < data[i]) {
+            increasedCount+=1
+        }
+        i++
+    } while (i < data.length); 
+    console.log(increasedCount)
 }
 
-function getSolutionPart2() {
-    return 42;
-}
-
-const part = process.env.part || "part1";
-
-if (part === "part1")
-    console.log(getSolutionPart1());
-else
-    console.log(getSolutionPart2());
+fs.readFile('./testdata.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err)
+        return
+    }
+    const lines = data.split(/\r?\n/);
+    determineIncrease(lines)
+})
