@@ -25,7 +25,5 @@ const getSolutionPart1 = () => determineDirection(inputDataLinesIntegers(), fals
 const getSolutionPart2 = () => determineDirection(inputDataLinesIntegers(), true) 
 
 const part = process.env.part || "part1"
-
 part === "part1" ? console.log(getSolutionPart1()) : console.log(getSolutionPart2())
-
 module.exports = { getSolutionPart1, getSolutionPart2, inputDataLinesIntegers }
