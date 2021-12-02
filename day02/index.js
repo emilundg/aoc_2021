@@ -14,9 +14,9 @@ const determineDirection = (data, withAim) => {
             horizontalPosition += num
             if (withAim) depth += (aim * num)
         } else if (direction === 'd') {
-            if(withAim) {aim += num} else {depth += num}
+            withAim ? (aim += num) : (depth += num)
         } else if (direction === 'u') {
-            if(withAim) {aim -= num} else {depth -=num}
+            withAim ? (aim -= num) : (depth -=num)
         }
        i++ 
     } while (i < data.length);
