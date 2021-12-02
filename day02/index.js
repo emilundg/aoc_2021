@@ -5,10 +5,7 @@ function inputDataLinesIntegers(filename="input.txt") {
 }
 
 const determineDirection = (data, withAim) => {
-    let horizontalPosition = 0;
-    let depth = 0;
-    let aim = 0;
-    let i = 0;
+    let horizontalPosition = 0, depth = 0, aim = 0, i = 0;
     do {
         const currentData = data[i]
         const num = +data[i].split(" ")[1]
