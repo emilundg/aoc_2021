@@ -1,8 +1,6 @@
 const fs = require('fs')
 
-function inputDataLinesIntegers(filename="input.txt") {
-    return fs.readFileSync(filename).toString().trim().split("\n")
-}
+const inputDataLinesIntegers = (filename="input.txt") => fs.readFileSync(filename).toString().trim().split("\n")
 
 const determineDirection = (data, withAim) => {
     let horizontalPosition = 0, depth = 0, aim = 0, i = 0;
@@ -23,13 +21,8 @@ const determineDirection = (data, withAim) => {
     return horizontalPosition * depth
 }
 
-function getSolutionPart1() {
-    return determineDirection(inputDataLinesIntegers(), false)
-}
-
-function getSolutionPart2() {
-    return determineDirection(inputDataLinesIntegers(), true) 
-}
+const getSolutionPart1 = () => determineDirection(inputDataLinesIntegers(), false)
+const getSolutionPart2 = () => determineDirection(inputDataLinesIntegers(), true) 
 
 const part = process.env.part || "part1"
 
@@ -38,6 +31,4 @@ if (part === "part1")
 else
     console.log(getSolutionPart2())
 
-module.exports = {
-    getSolutionPart1, getSolutionPart2, inputDataLinesIntegers
-}
+module.exports = { getSolutionPart1, getSolutionPart2, inputDataLinesIntegers }
