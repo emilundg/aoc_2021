@@ -4,9 +4,10 @@ function inputDataLinesIntegers(filename="input.txt") {
     return fs.readFileSync(filename).toString().trim().split("\n")
 }
 
-let horizontalPosition = 0;
-let depth = 0;
-const determineDirection = (data) => {
+const determineDirection = (data, withAim) => {
+    let horizontalPosition = 0;
+    let depth = 0;
+    let aim = 0;
     let i = 0;
     do {
         const currentData = data[i]
@@ -14,10 +15,11 @@ const determineDirection = (data) => {
         const direction = currentData[0]
         if (direction === 'f') {
             horizontalPosition += num
+            if (withAim) depth += (aim * num)
         } else if (direction === 'd') {
-            depth += num 
+            if(withAim) {aim += num} else {depth += num}
         } else if (direction === 'u') {
-            depth -= num
+            if(withAim) {aim -= num} else {depth -=num}
         }
        i++ 
     } while (i < data.length);
@@ -25,11 +27,11 @@ const determineDirection = (data) => {
 }
 
 function getSolutionPart1() {
-    return determineDirection(inputDataLinesIntegers())
+    return determineDirection(inputDataLinesIntegers(), false)
 }
 
 function getSolutionPart2() {
-    return inputDataLinesIntegers() 
+    return determineDirection(inputDataLinesIntegers(), true) 
 }
 
 const part = process.env.part || "part1"
