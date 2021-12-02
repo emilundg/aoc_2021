@@ -4,7 +4,7 @@ const inputDataLinesIntegers = (filename="input.txt") => fs.readFileSync(filenam
 const determineDirection = (data, withAim) => {
     let horizontalPosition = 0, depth = 0, aim = 0, i = 0;
     do {
-        const currentData = data[i]
+        const currentData = data[i];
         const num = +data[i].split(" ")[1];
         const direction = currentData[0];
         if (direction === 'f') {
