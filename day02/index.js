@@ -21,11 +21,11 @@ const determineDirection = (data) => {
         }
        i++ 
     } while (i < data.length);
+    return horizontalPosition * depth
 }
 
 function getSolutionPart1() {
-    determineDirection(inputDataLinesIntegers())
-    return horizontalPosition * depth
+    return determineDirection(inputDataLinesIntegers())
 }
 
 function getSolutionPart2() {
