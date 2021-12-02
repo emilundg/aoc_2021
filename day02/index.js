@@ -10,13 +10,14 @@ const determineDirection = (data) => {
     let i = 0;
     do {
         const currentData = data[i]
+        const num = +data[i].split(" ")[1]
         const direction = currentData[0]
         if (direction === 'f') {
-            horizontalPosition += parseInt(data[i].split(" ")[1])
+            horizontalPosition += num
         } else if (direction === 'd') {
-            depth += parseInt(data[i].split(" ")[1])
+            depth += num 
         } else if (direction === 'u') {
-            depth -= parseInt(data[i].split(" ")[1])
+            depth -= num
         }
        i++ 
     } while (i < data.length);
