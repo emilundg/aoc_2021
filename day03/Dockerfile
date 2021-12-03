@@ -1,8 +1,6 @@
-FROM golang:1.17-alpine as BASE
-WORKDIR /src
-COPY ./ .
-RUN go build -o /bin/aoc
+FROM node:17-slim
+COPY . /app
+WORKDIR /app
+RUN yarn install
 
-FROM scratch
-COPY --from=BASE /bin/aoc /bin/aoc
-ENTRYPOINT [ "/bin/aoc" ]
+CMD node /app/index.js
