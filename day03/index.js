@@ -1,45 +1,32 @@
 const fs = require('fs');
 const inputDataLinesIntegers = (filename="input.txt") => fs.readFileSync(filename).toString().trim().split("\n");
 
-const reorganizeData = (data) => {
-    let i = 0, j = 0, verticalMap = [];
+const determinePowerUsage = (data) => {
+    const dataLength = data.length;
+    let i = 0, j = 0, indexArray = [0,0,0,0,0,0,0,0,0,0,0,0], gammaRateArray = [], epsilonRateArray = []; 
     do {
         do {
-            const currentNumValue = data[i][j];
-            verticalMap[j] ? verticalMap[j] += currentNumValue : verticalMap[j] = currentNumValue;
-           j++; 
-        } while (j < 12);
-       j = 0;
-       i++;
-    } while (i < data.length);
-    return verticalMap;
-}
-
-const reorganizedData = reorganizeData(inputDataLinesIntegers());
-const determinePowerUsage = () => {
-    let i = 0, j = 0, ones = 0, zeroes = 0, gammaRate = "", epsilonRate = "", valueIndexes = [];
-    do {
-        do {
-            const value = reorganizedData[i][j];
-            value === "1" ? ones+=1 : zeroes+=1;
+            if (data[i][j] === "1") indexArray[j]+=1;
+            if (indexArray[j] > dataLength / 2) {
+                gammaRateArray[j] = "1"
+                epsilonRateArray[j] = "0"
+            } else {
+                gammaRateArray[j] = "0";
+                epsilonRateArray[j] = "1";
+            }
             j++;
-        } while (j < 1000);
-        if (ones > zeroes) {
-            gammaRate+="1";
-            epsilonRate+="0";
-        } else {
-            gammaRate+="0";
-            epsilonRate+="1";
-        }
-        j = 0, zeroes = 0, ones = 0;
-        i++;
-    } while (i < reorganizedData.length);
-    return parseInt(gammaRate, 2) * parseInt(epsilonRate, 2)
+        } while (j < data[i].length);
+        j = 0;
+        i++; 
+    } while (i < dataLength);
+    const gammaBinary = gammaRateArray.join("");
+    const epsilonBinary = epsilonRateArray.join("");
+    return parseInt(gammaBinary, 2) * parseInt(epsilonBinary, 2);
 }
 
-const getSolutionPart1 = () => determinePowerUsage();
-const getSolutionPart2 = () => determinePowerUsage();
+const getSolutionPart1 = () => determinePowerUsage(inputDataLinesIntegers());
+const getSolutionPart2 = () => determinePowerUsage(inputDataLinesIntegers());
 
-const part = process.env.part || "part2";
+const part = process.env.part || "part1";
 part === "part1" ? console.log(getSolutionPart1()) : console.log(getSolutionPart2());
 module.exports = { getSolutionPart1, getSolutionPart2, inputDataLinesIntegers };
