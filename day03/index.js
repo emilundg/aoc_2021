@@ -21,6 +21,55 @@ const determinePowerUsage = (data) => {
     return parseInt(gammaRate, 2) * parseInt(epsilonRate, 2); 
 }
 
+let oxygen = [], scrubber = [], cOc = 0, cSc = 0;
+const determineOxygen = (data) => {
+    while (oxygen.length !== 1) {
+            let ones = [], zeroes = [], j = 0;
+            do {
+                if (data[j][cOc] === "1") {
+                    ones.push(data[j]);
+                } else {
+                    zeroes.push(data[j]);
+                }
+                j++;
+            } while (j < data.length);
+            if (ones.length >= zeroes.length) {
+                oxygen = ones;
+            } else {
+                oxygen = zeroes;
+            }
+            cOc++;
+            determineOxygen(oxygen);
+    }
+}    
+
+const determineScrubber = (data) => {
+    while (scrubber.length !== 1) {
+            let ones = [], zeroes = [], j = 0;
+            do {
+                if (data[j][cSc] === "1") {
+                    ones.push(data[j]);
+                } else {
+                    zeroes.push(data[j]);
+                }
+                j++;
+            } while (j < data.length);
+            if (ones.length < zeroes.length) {
+                scrubber = ones;
+            } else {
+                scrubber = zeroes;
+            }
+            cSc++;
+            determineScrubber(scrubber);
+    }
+}    
+
+const determineLifeSupport = (data) => {
+    determineOxygen(data);
+    determineScrubber(data);
+    return parseInt(oxygen[0], 2) * parseInt(scrubber[0], 2);
+}
+
 const getSolutionPart1 = () => determinePowerUsage(inputDataLinesIntegers());
 const getSolutionPart2 = () => determineLifeSupport(inputDataLinesIntegers());
 
