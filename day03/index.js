@@ -8,7 +8,7 @@ const determinePowerUsage = (data) => {
         do {
             data[j][i] === "1" ? ones+=1 : zeroes+=1;
             j++;
-        } while (j < data.length);
+        } while (j < 1000);
         if (ones > zeroes) {
             gammaRate+=1;
             epsilonRate+=0;
