@@ -31,6 +31,6 @@ const alignCrabs = (data, withAlignmentFactor) => {
 const getSolutionPart1 = () => alignCrabs(inputDataLinesIntegers(), false);
 const getSolutionPart2 = () => alignCrabs(inputDataLinesIntegers(), true);
 
-const part = process.env.part || "part2";
+const part = process.env.part || "part1";
 part === "part1" ? console.log(getSolutionPart1()) : console.log(getSolutionPart2());
 module.exports = { getSolutionPart1, getSolutionPart2, inputDataLinesIntegers };
