@@ -1,12 +1,15 @@
 const fs = require('fs');
 const inputDataLinesIntegers = (filename="input.txt") => fs.readFileSync(filename).toString().trim().split(",");
 
+let calcValues = {};
 const increaseFactor = (steps) => {
+    if (calcValues[steps]) return calcValues[steps];
     let i = 0, factor = 0;
     do {
         factor+=i;
         i++; 
     } while (i < steps);
+    calcValues[steps] = factor;
     return factor; 
 }
 const alignCrabs = (data, withAlignmentFactor) => {
@@ -28,6 +31,6 @@ const alignCrabs = (data, withAlignmentFactor) => {
 const getSolutionPart1 = () => alignCrabs(inputDataLinesIntegers(), false);
 const getSolutionPart2 = () => alignCrabs(inputDataLinesIntegers(), true);
 
-const part = process.env.part || "part1";
+const part = process.env.part || "part2";
 part === "part1" ? console.log(getSolutionPart1()) : console.log(getSolutionPart2());
 module.exports = { getSolutionPart1, getSolutionPart2, inputDataLinesIntegers };
